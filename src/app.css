@@ -1,1 +1,21 @@
 @import 'tailwindcss';
+
+body {
+    background: #B1F7EB;
+    overflow-x: hidden;
+}
+
+.title {
+    text-align: center;
+
+    font-family: 'Jua';
+    font-style: normal;
+    font-size: 9.5em;
+    line-height: 188px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    color: #CEE23F;
+    text-shadow: 6px 6px 0px #A6C536;
+}
