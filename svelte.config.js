@@ -11,7 +11,7 @@ const config = {
 			fallback: 'index.html',
 		}),
 		paths: {
-			base: "/TheZoo"
+			base: "/The-Zoo"
 		}
 	}
 };
