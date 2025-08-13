@@ -1,9 +1,34 @@
 @import 'tailwindcss';
 
-body {
-    background: #B1F7EB;
+html {
     overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
+
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+body {
+    width: 100vw;
+}
+
+body, .sky {
+    background: #B1F7EB;
+}
+
+::selection {
+  background: #CEE23F;
+  color: #083537;
+  border-radius: 15px;
+}
+
+.title::selection {
+  text-shadow: 6px 6px 0px #222b0548;
+}
+
 
 .title {
     text-align: center;
@@ -17,5 +42,34 @@ body {
     font-weight: bold;
 
     color: #CEE23F;
-    text-shadow: 6px 6px 0px #A6C536;
+    text-shadow: 6px 6px 0px #6f861e;
+}
+
+h1 {
+    font-family: 'Jua';
+    font-style: normal;
+    font-size: 2em;
+    font-weight: bold;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-shadow: 4px 4px 0px #00000055;
+}
+
+.button {
+    cursor: pointer; 
+    border-radius: 98989004px; 
+    background: #0000004f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 5px;
+}
+
+.button:hover {
+    background: #0000007f;
 }
