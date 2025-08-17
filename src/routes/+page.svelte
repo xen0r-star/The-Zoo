@@ -4,6 +4,7 @@
     import Tree2 from '$lib/assets/Tree2.svg';
     import Tree3 from '$lib/assets/Tree3.svg';
     import Tree4 from '$lib/assets/Tree4.svg';
+    import IdCard from '$lib/assets/IdCard.svg';
 
     import { onMount } from 'svelte';
 
@@ -104,18 +105,75 @@
     </div>
 </div>
 
-<div style="background-color: #DDE9BB; height: 90vh; position: relative; z-index:100;">
+<div style="background-color: #76912f; height: 90vh; position: relative; z-index:100;">
     <div class="border"></div>
+
+    <!-- fake id card for infomation of the chameleon -->
+    <div style="display: flex; flex-direction: column; width: 80%; height: 80%; margin: auto; position: relative; top: 50%; transform: translateY(-50%); background: #eaeaea;; border-radius: 15px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1);">
+        <h2 style="display: flex; align-items: center; justify-content: center; border-radius: 15px 15px 0 0; width: 100%; height: 42px; background: #002564; text-align: center; color: #fff; font-weight: bold; font-size: 1.15em;">ID CARD</h2>
+        <div style="display: flex; flex-direction: row; justify-content: space-evenly; padding: 0px 32px; align-items: center; height: 100%;">
+            <div style="width: 30%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <img src={IdCard} alt="Chameleon" style="background: #ffffff; width: 80%; border-radius: 20px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1);" />
+                <p style="margin-top: 10px; font-weight: bold; font-size: 1.25em;">Chameleon</p>
+                <p style="font-size: 1em;">Chamaeleonidae</p>
+            </div>
+            <div style="width: 55%; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+                <span style="display: flex; align-items: flex-start; flex-direction: row; margin-block: 5px;">
+                    <span class="material-symbols-outlined" style="font-size: 2em; color: #161616;">pets</span>
+                    <p style="margin-left: 10px; font-size: 1.1em; font-weight: bold;">Class:</p>
+                    <p style="margin-left: 3px; font-size: 1.1em;">Reptilia</p>
+                </span>
+
+                <span style="display: flex; align-items: flex-start; flex-direction: row; margin-block: 5px;">
+                    <span class="material-symbols-outlined" style="font-size: 2em; color: #161616;">straighten</span>
+                    <p style="margin-left: 10px; font-size: 1.1em; font-weight: bold;">Size:</p>
+                    <p style="margin-left: 3px; font-size: 1.1em;">From 3 cm (Brookesia nana, the smallest) up to 70 cm (Parson's chameleon, the largest)</p>
+                </span>
+
+                <span style="display: flex; align-items: flex-start; flex-direction: row; margin-block: 5px;">
+                    <span class="material-symbols-outlined" style="font-size: 2em; color: #161616;">fitness_center</span>
+                    <p style="margin-left: 10px; font-size: 1.1em; font-weight: bold;">Weight:</p>
+                    <p style="margin-left: 3px; font-size: 1.1em;">15g to 200g depending on the species</p>
+                </span>
+
+                <span style="display: flex; align-items: flex-start; flex-direction: row; margin-block: 5px;">
+                    <span class="material-symbols-outlined" style="font-size: 2em; color: #161616;">hourglass_empty</span>
+                    <p style="margin-left: 10px; font-size: 1.1em; font-weight: bold;">Lifespan:</p>
+                    <p style="margin-left: 3px; font-size: 1.1em;">5 to 10 years on average</p>
+                </span>
+
+                <span style="display: flex; align-items: flex-start; flex-direction: row; margin-block: 5px;">
+                    <span class="material-symbols-outlined" style="font-size: 2em; color: #161616;">park</span>
+                    <p style="margin-left: 10px; font-size: 1.1em; font-weight: bold;">Habitat:</p>
+                    <p style="margin-left: 3px; font-size: 1.1em;">Tropical forests, savannas, mountains, and even semi-desert areas</p>
+                </span>
+
+                <span style="display: flex; align-items: flex-start; flex-direction: row; margin-block: 5px;">
+                    <span class="material-symbols-outlined" style="font-size: 2em; color: #161616;">public</span>
+                    <p style="margin-left: 10px; font-size: 1.1em; font-weight: bold;">Distribution:</p>
+                    <p style="margin-left: 3px; font-size: 1.1em;">Africa, Madagascar (home to most species), southern Europe, Middle East, India, Sri Lanka</p>
+                </span>
+
+                <span style="display: flex; align-items: flex-start; flex-direction: row; margin-block: 5px;">
+                    <span class="material-symbols-outlined" style="font-size: 2em; color: #161616;">restaurant</span>
+                    <p style="margin-left: 10px; font-size: 1.1em; font-weight: bold;">Diet:</p>
+                    <p style="margin-left: 3px; font-size: 1.1em;">Mostly insects (crickets, flies, grasshoppers), sometimes small birds or lizards</p>
+                </span>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div style="height: 90vh; position: relative; z-index:100;">
+<div style="background: #f4f4f4; height: 90vh; position: relative; z-index:100;">
     <!-- <div class="border"></div> -->
 
-    <div style="width: 100vw; height: 100%; transform: translateX(-{currentSlide * 100}vw); display: flex; flex-direction: row; flex-wrap: nowrap; transition: transform 1s linear;">
-        <div style="background: #76912F; width: 100vw; height: 100%; flex-shrink: 0;"></div>
-        <div style="background: #912F2F; width: 100vw; height: 100%; flex-shrink: 0;"></div>
-        <div style="background: #912F8E; width: 100vw; height: 100%; flex-shrink: 0;"></div>
-        <div style="background: #2F8491; width: 100vw; height: 100%; flex-shrink: 0;"></div>
+    <!-- <h2></h2> -->
+
+    <div style="width: 100vw; height: 100%; transform: translateX(calc(10% - 25px - (80% + 25px) * {currentSlide})); display: flex; flex-direction: row; flex-wrap: nowrap; transition: transform 1s linear;">
+        <div style="background: #76912F; width: 80%; height: 80%; margin: auto 25px; border-radius: 15px; flex-shrink: 0;"></div>
+        <div style="background: #912F2F; width: 80%; height: 80%; margin: auto 25px; border-radius: 15px; flex-shrink: 0;"></div>
+        <div style="background: #912F8E; width: 80%; height: 80%; margin: auto 25px; border-radius: 15px; flex-shrink: 0;"></div>
+        <div style="background: #2F8491; width: 80%; height: 80%; margin: auto 25px; border-radius: 15px; flex-shrink: 0;"></div>
     </div>
 
 
@@ -180,8 +238,8 @@
     <div class="border"></div>
 </div>
 
-<div style="width: 100vw; height: 10px; position: sticky; bottom: 0; z-index: 200">
+<!-- <div style="width: 100vw; height: 10px; position: sticky; bottom: 0; z-index: 200">
     <div style="background: #00000096; width: 100vw; height: 10px; bottom: 0; z-index: 200">
         <div style="position: absolute; width: {scrollProgress}%; height: 10px; background: #334517; z-index: 210"></div>
     </div>
-</div>
+</div> -->

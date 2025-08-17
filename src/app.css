@@ -2,14 +2,31 @@
 
 html {
     overflow-x: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    /* scrollbar-width: none; */
+    /* -ms-overflow-style: none; */
+    /* scrollbar-width: thin; */
+    /* scrollbar-color: #6f861e #cfe23f00; */
 }
 
-html::-webkit-scrollbar {
+/* html::-webkit-scrollbar {
+  width: 10px;
+  background: #cfe23f00;
+  border-radius: 8px;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #6f861e;
+  border-radius: 8px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #6f861e;
+} */
+ 
+/* html::-webkit-scrollbar {
   width: 0;
   height: 0;
-}
+} */
 
 body {
     width: 100vw;
@@ -63,6 +80,7 @@ h1 {
     cursor: pointer; 
     border-radius: 98989004px; 
     background: #0000004f;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,4 +90,20 @@ h1 {
 
 .button:hover {
     background: #0000007f;
+}
+
+
+body {
+    background: #1A1A2E;
+    background: #1B263B;
+    background: #FFD6D1;
+    background: #B3E5FC;
+    background: #81D4FA;
+    background: #4FC3F7;
+    /* background: #29B6F6; */
+    /* background: #03A9F4; */
+    /* background: #0288D1; */
+    background: #2C3E50;
+    background: #1B263B;
+    background: #1A1A2E;
 }
