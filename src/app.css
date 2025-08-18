@@ -1,12 +1,11 @@
 @import 'tailwindcss';
 
-html {
-    overflow-x: hidden;
-    /* scrollbar-width: none; */
-    /* -ms-overflow-style: none; */
-    /* scrollbar-width: thin; */
-    /* scrollbar-color: #6f861e #cfe23f00; */
-}
+/* html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: #6f861e #cfe23f00;
+} */
 
 /* html::-webkit-scrollbar {
   width: 10px;
@@ -22,18 +21,23 @@ html::-webkit-scrollbar-thumb {
 html::-webkit-scrollbar-thumb:hover {
   background: #6f861e;
 } */
- 
+
 /* html::-webkit-scrollbar {
   width: 0;
   height: 0;
 } */
 
-body {
-    width: 100vw;
+html, body {
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+
+  font-size: 16px;
 }
 
-body, .sky {
-    background: #B1F7EB;
+body,
+.sky {
+  background: #B1F7EB;
 }
 
 ::selection {
@@ -48,62 +52,90 @@ body, .sky {
 
 
 .title {
-    text-align: center;
+  text-align: center;
 
-    font-family: 'Jua';
-    font-style: normal;
-    font-size: 9.5em;
-    line-height: 188px;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    font-weight: bold;
+  font-family: 'Jua';
+  font-style: normal;
+  font-size: 10vw;
+  line-height: 188px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-weight: bold;
 
-    color: #CEE23F;
-    text-shadow: 6px 6px 0px #6f861e;
+  color: #CEE23F;
+  text-shadow: 6px 6px 0px #6f861e;
 }
 
 h1 {
-    font-family: 'Jua';
-    font-style: normal;
-    font-size: 2em;
-    font-weight: bold;
+  font-family: 'Jua';
+  font-style: normal;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1;
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    text-shadow: 4px 4px 0px #00000055;
+  text-shadow: 4px 4px 0px #00000055;
 }
 
 .button {
-    cursor: pointer; 
-    border-radius: 98989004px; 
-    background: #0000004f;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    padding: 5px;
+  cursor: pointer;
+  border-radius: 98989004px;
+  background: #0000004f;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 5px;
 }
 
 .button:hover {
-    background: #0000007f;
+  background: #0000007f;
 }
 
 
-body {
-    background: #1A1A2E;
-    background: #1B263B;
-    background: #FFD6D1;
-    background: #B3E5FC;
-    background: #81D4FA;
-    background: #4FC3F7;
-    /* background: #29B6F6; */
-    /* background: #03A9F4; */
-    /* background: #0288D1; */
-    background: #2C3E50;
-    background: #1B263B;
-    background: #1A1A2E;
+/* body { */
+  /* background: #1A1A2E;
+  background: #1B263B;
+  background: #FFD6D1;
+  background: #B3E5FC;
+  background: #81D4FA;
+  background: #4FC3F7; */
+
+  /* background: #29B6F6; */
+  /* background: #03A9F4; */
+  /* background: #0288D1; */
+
+  /* background: #2C3E50;
+  background: #1B263B;
+  background: #1A1A2E; */
+/* } */
+
+
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  #IdCard {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  #IdCardText {
+    width: 100% !important;
+    border-top: solid 2px gray !important;
+    padding-top: 15px !important;
+  }
+
+  #IdCardBarCode {
+    text-align: center !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 425px) {
+  #PositionChameleon {
+    right: -140px !important;
+  }
 }
