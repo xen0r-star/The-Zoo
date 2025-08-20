@@ -1,7 +1,37 @@
 [
     {
-        "title": "",
-        "icon": "",
-        "description": ""
+        "title": "Thermorégulation passive",
+        "icon": "wb_sunny",
+        "description": "Il se déplace simplement entre l'ombre et le soleil pour réguler sa température, comme une “pile vivante”.",
+        "chameleonColor": "yellow",
+        "background": "#E3CD0F"
+    },
+    {
+        "title": "Perception UV",
+        "icon": "eyeglasses_2",
+        "description": "Il peut voir les ultraviolets, invisibles pour nous.",
+        "chameleonColor": "purple",
+        "background": "#912F8E"
+    },
+    {
+        "title": "Stress et émotions visibles",
+        "icon": "palette",
+        "description": "Un caméléon stressé peut devenir sombre ou noir.",
+        "chameleonColor": "red",
+        "background": "#912F2F"
+    },
+    {
+        "title": "Le roi du ralenti",
+        "icon": "hourglass",
+        "description": "Il marche tellement lentement que parfois… des insectes lui grimpent dessus sans qu'il réagisse.",
+        "chameleonColor": "blue",
+        "background": "#2F8491"
+    },
+    {
+        "title": "Queue préhensile",
+        "icon": "eco",
+        "description": "La queue du caméléon sert de cinquième main pour s'accrocher aux branches. Il peut rester suspendu à une branche fine grâce à cette queue.",
+        "chameleonColor": "green",
+        "background": "#76912F"
     }
 ]

@@ -111,6 +111,17 @@ h1 {
 /* } */
 
 
+@media (max-width: 1292px) {
+  #ChameleonUpsideDown {
+    transform: rotate(12.36deg) translate(33%, 15%) !important;
+  }
+}
+
+@media (max-width: 898px) {
+  #ChameleonUpsideDown {
+    transform: rotate(12.36deg) translate(50%, 15%) !important;
+  }
+}
 
 @media (max-width: 768px) {
   h1 {
@@ -134,8 +145,47 @@ h1 {
   }
 }
 
+@media (max-width: 710px) {
+  #ChameleonDangerText {
+    flex-direction: column-reverse !important;
+    align-items: center;
+  }
+
+  #UICNLink {
+    position: relative !important;
+  }
+}
+
+@media (max-width: 616px) {
+  #ChameleonUpsideDown {
+    display: none !important;
+  }
+
+  #FascinatingCamouflageText {
+    max-width: 100% !important;
+  }
+}
+
 @media (max-width: 425px) {
   #PositionChameleon {
     right: -140px !important;
+  }
+
+  #ChameleonUpsideDown {
+    display: none !important;
+  }
+
+  #ChameleonTongue{
+    transform: rotate(12.36deg) translate(-18%, -10%) !important;
+  }
+
+  #ChameleonDangerText > div {
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 320px) {
+  #ChameleonTongue {
+    display: none !important;
   }
 }
