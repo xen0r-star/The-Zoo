@@ -308,6 +308,10 @@ h1 {
         width: 250px !important;
         height: 250px !important;
     }
+
+    .title {
+        text-shadow: 3px 3px 0px #6f861e !important;
+    }
 }
 
 @media (max-width: 320px) {

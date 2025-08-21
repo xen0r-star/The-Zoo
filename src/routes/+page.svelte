@@ -169,6 +169,10 @@
 </script>
 
 <style>
+    path:focus {
+        outline: none;
+    }
+
     .border {
         background: url("data:image/svg+xml;utf8,<svg width='256' height='128' viewBox='0 0 256 128' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M128 0C57.3075 0 0 57.3075 0 128H256C256 57.3075 198.692 0 128 0Z' fill='%2376912F'/></svg>") center;
         background-repeat: repeat-x;
@@ -577,7 +581,7 @@
 
 
 <div style="background-color: var(--secondary); height: 300px; position: relative; z-index:100; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-wrap: nowrap;">
-    <h3 style="font-size: 1.25em; margin-bottom: 25px; color: var(--black-text);">Are you ready to challenge me and prove your skills?</h3>
+    <h3 style="font-size: 1.25em; margin-bottom: 25px; color: var(--black-text); padding: 25px; text-align: center;">Are you ready to challenge me and prove your skills?</h3>
     <button onclick={interactionPage} class="big-button" style="background: {unlockInteraction ? '#90ad28' : '#8e8e8e'}; color: #fff; font-size: 1.35em; font-weight: bold; padding: 18px 48px; border: none; border-radius: 16px; box-shadow: 7px 7px 0px {unlockInteraction ? '#627814' : '#3b3b3b'}; cursor: pointer; letter-spacing: 0.04em; transition: all 0.15s ease-in-out; margin: 0 auto; display: flex; flex-direction: row; align-items: center; gap: 10px;">
         <span class="material-symbols-outlined bannerIcon" style="font-weight: bold;">{unlockInteraction ? 'lock_open_right' : 'lock'}</span> Meet Chameleon
     </button>
@@ -593,7 +597,7 @@
         </svg>
     </a>
 
-    <div style="position: absolute; z-index: 90; bottom: 0; left: 0; right: 0; filter: drop-shadow(-5px 5px 0px rgba(0, 0, 0, 0.25)); display: flex; flex-direction: column; align-items: center; height: 80%; margin-top: 15px;">
+    <div style="position: absolute; height: 30vw; max-height: 200px; z-index: 90; bottom: 0; left: 0; right: 0; filter: drop-shadow(-5px 5px 0px rgba(0, 0, 0, 0.25)); display: flex; flex-direction: column; align-items: center; margin-top: 15px;">
         <svg width="866" height="262" viewBox="0 0 866 262" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_85_17)">
                 <path d="M60.4693 276.105C52.6477 281.934 43.6894 291.536 32.5761 302.369C40.7851 291.218 55.7362 275.894 56.4589 272.349C45.4983 274.427 19.6608 281.784 23.5301 315.391C61.4391 307.396 60.4693 276.105 60.4693 276.105Z" fill="#7E9B24"/>
@@ -646,8 +650,8 @@
     </div>
 </div>
 
-<div style="width: 100vw; height: 10px; position: sticky; bottom: 0; z-index: 200">
+<!-- <div style="width: 100vw; height: 10px; position: sticky; bottom: 0; z-index: 200">
     <div style="background: #00000096; width: 100vw; height: 10px; bottom: 0; z-index: 200">
         <div style="position: absolute; width: {scrollProgress}%; height: 10px; background: #334517; z-index: 210"></div>
     </div>
-</div>
+</div> -->
