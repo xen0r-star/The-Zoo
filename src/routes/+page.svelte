@@ -5,6 +5,21 @@
     import { base } from '$app/paths';
 
 
+    const skyColor = [
+        '#1A1A2E', // 02h
+        '#1B263B', // 04h
+        '#FFD6D1', // 06h
+        '#B3E5FC', // 08h
+        '#81D4FA', // 10h
+        '#81D4FA', // 12h
+        '#81D4FA', // 14h
+        '#81D4FA', // 16h
+        '#81D4FA', // 18h
+        '#334b63', // 20h
+        '#1B263B', // 22h
+        '#1A1A2E'  // 00h 
+    ];
+
     const chameleonPalettes = {
         green: {
             color1: '#6E8823',
@@ -48,6 +63,14 @@
         }
     };
 
+
+    const hour = new Date().getHours();
+    $effect(() => {
+        document.body.style.backgroundColor = skyColor[Math.floor(hour / 2)];
+        document.getElementById('skyTree')?.setAttribute('fill', skyColor[Math.floor(hour / 2)]);
+    });
+
+
     type ChameleonColor = "green" | "red" | "purple" | "blue" | "yellow";
     let chameleonColor = $state<ChameleonColor>('green');
 
@@ -69,6 +92,12 @@
     let currentFacts = $state(0);
     let totalFacts = $state(0);
     let loaded = $state(false);
+    let unlockInteraction = $derived(
+        loaded && currentFacts >= totalFacts - 1
+    );
+    let unlockLevel = $derived(
+        loaded ? Math.round((currentFacts + 1) / totalFacts * 100) : 0
+    );
 
 
     function syncChameleonColorIndex() {
@@ -81,6 +110,12 @@
     function prevSlide() {
         if (currentFacts > 0) currentFacts -= 1;
         setTimeout(syncChameleonColorIndex, 500);
+    }
+
+    function interactionPage() {
+        if (unlockInteraction) {
+            window.location.href = 'chameleon';
+        }
     }
     
 
@@ -98,6 +133,7 @@
     const maxY = 5;
 
     onMount(function() {
+        // Facts ---------------------------------------
         fetch(`${ base }/facts.json`)
         .then(response => response.json())
         .then(data => {
@@ -106,6 +142,8 @@
             totalFacts = facts.length;
         });
         
+
+        // Eye -----------------------------------------
         const eye = document.getElementById('eye-chameleon1');
         if (eye) {
             const rect = eye.getBoundingClientRect();
@@ -121,8 +159,9 @@
             eyeOffsetY += (Math.max(minY, Math.min(maxY, dy)) - eyeOffsetY) * 0.2;
         };
 
-        window.addEventListener('mousemove', handleMouseMove);
 
+        // Event listener ------------------------------
+        window.addEventListener('mousemove', handleMouseMove);
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
         };
@@ -130,9 +169,6 @@
 </script>
 
 <style>
-    .sky {
-        background: #B1F7EB;
-    }
     .border {
         background: url("data:image/svg+xml;utf8,<svg width='256' height='128' viewBox='0 0 256 128' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M128 0C57.3075 0 0 57.3075 0 128H256C256 57.3075 198.692 0 128 0Z' fill='%2376912F'/></svg>") center;
         background-repeat: repeat-x;
@@ -147,30 +183,19 @@
         top: 0;
     }
 
-    .border-white {
-        background: url("data:image/svg+xml;utf8,<svg width='256' height='128' viewBox='0 0 256 128' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M128 0C57.3075 0 0 57.3075 0 128H256C256 57.3075 198.692 0 128 0Z' fill='%23F8FFE7'/></svg>") center;
-        background-repeat: repeat-x;
-        background-size: auto 100%;
-        width: 100vw;
-        height: 20px;
-        transform: translateY(-90%);
-        border: none;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
+    .big-button:hover {
+        transform: translate(7px, 7px);
+        box-shadow: rgb(59, 59, 59) 0px 0px 0px !important;
     }
 </style>
 
 
 <ZooBanner />
 
-<!-- #083537; -->
-
 <div style="height: calc(100vh - 100px - 65px);"></div>
 
 <div style="width: 100vw; position: relative; height: calc(73.6vw + 9px);">
-    <h1 class="title" style="z-index: 20; position: fixed; top: 40%; transform: translateY(-50%); width: 100%;">Chameleon</h1>
+    <h1 class="title" id="title" style="z-index: 20; position: fixed; top: 40%; transform: translateY(-50%); width: 100%;">Chameleon</h1>
     
     <div class="button" style="position: fixed; bottom: 0; left: 50%; transform: translate(-50%, 0); margin-bottom: 15vh; z-index: -10;">
         <svg width="50" height="50" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -178,9 +203,9 @@
         </svg>
     </div>
 
-    <div class="sky" style="position: absolute; top: 0;">
+    <div class="tree" style="position: absolute; top: 0;">
         <!-- Tree 1 -->
-        <svg style="position: absolute; z-index: 0; width: 100vw; height: auto;" width="1483" height="1133" viewBox="0 0 1483 1133" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg id="tree" style="position: absolute; z-index: 0; width: 100vw; height: auto;" width="1483" height="1133" viewBox="0 0 1483 1133" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_1_524)">
             <path d="M1046.92 147.742L1046.74 147.655C1035.53 155.384 1025.61 164.691 1017.38 175.229C1016.53 175.179 1015.67 175.137 1014.81 175.104C1013.58 175.055 1012.33 175.023 1011.08 175.009C1010.55 175.003 1010.03 175 1009.5 175C980.048 175 953.496 184.514 934.8 199.747C919.789 183.746 897.113 172.247 870.887 168.402C864.609 167.482 858.128 167 851.5 167C841.433 167 831.705 168.112 822.514 170.183C795.318 176.312 772.822 190.845 760.149 209.859C742.229 198.102 718.947 191 693.5 191C674.485 191 656.68 194.965 641.417 201.875C624.644 191.228 604.354 185 582.5 185C562.87 185 544.504 190.024 528.813 198.762C510.143 184.624 485.287 176 458 176C437.655 176 418.663 180.794 402.577 189.093C395.099 186.449 386.981 185 378.5 185L377.76 185.004C371.29 160.542 340.279 142 303 142C275.384 142 251.208 152.174 237.9 167.393C228.286 163.334 217.031 161 205 161C200.891 161 196.872 161.272 192.979 161.792C179.695 163.568 167.865 168.229 158.86 174.814C153.655 174.276 148.363 174 143 174C118.996 174 96.4131 179.537 76.709 189.285C60.6104 182.124 41.7119 178 21.5 178C-37.3184 178 -85 212.922 -85 256C-85 264.479 -83.1523 272.643 -79.7363 280.287C-91.2393 295.457 -98 313.991 -98 334C-98 385.363 -53.4521 427 1.5 427C25.7666 427 48.0049 418.88 65.2734 405.389C87.46 419.033 114.207 427 143 427C149.391 427 155.681 426.607 161.842 425.848C176.401 451.004 204.155 468 236 468C245.537 468 254.708 466.476 263.268 463.664C291.018 493.933 331.464 513 376.5 513C411.456 513 443.647 501.513 469.282 482.217C474.094 482.733 479.007 483 484 483C518.885 483 549.871 469.972 569.404 449.811C600.709 480.369 649.362 500 704 500C749.469 500 790.792 486.405 821.423 464.232C843.562 485.997 878.142 500 917 500C937.266 500 956.368 496.191 973.148 489.459C994.672 515.049 1032.25 532 1075 532C1109.85 532 1141.26 520.737 1163.34 502.712C1169.26 503.56 1175.32 504 1181.5 504C1229.83 504 1271.34 477.062 1289.38 438.56C1308.98 463.607 1341.59 480 1378.5 480C1398.27 480 1416.8 475.299 1432.76 467.086C1447.26 474.03 1464.07 478 1482 478C1536.68 478 1581 441.063 1581 395.5C1581 356.507 1548.54 323.831 1504.9 315.219C1532.15 296.088 1550 264.158 1550 228C1550 169.458 1503.21 122 1445.5 122C1428.89 122 1413.18 125.931 1399.24 132.926C1386.12 121.818 1369.92 113.821 1351.96 110.187C1344.89 108.755 1337.54 108 1330 108C1285.53 108 1247.64 134.266 1233.22 171.061C1208.3 141.763 1169.98 123 1127 123C1097.63 123 1070.43 131.764 1048.2 146.666L1048.09 146.864L1047.96 147.126L1047.8 147.434L1047.5 148.032L1047.39 147.976L1047.17 147.869L1046.92 147.742Z" fill="#557129"/>
             </g>
@@ -264,7 +289,7 @@
 
         <!-- Sky -->
         <svg style="position: absolute; z-index: -10; width: 100vw; height: auto;" width="1483" height="1133" viewBox="0 0 1483 1133" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M1483 224.879V1133H0V201.769C14.9373 197.901 31.738 195.73 49.5 195.73C87.7656 195.73 121.569 205.808 141.893 221.207C161.021 209.974 186.73 203.097 215 203.097C253.013 203.097 286.396 215.532 305.376 234.27C323.952 224.519 347.884 218.65 374 218.65C402.936 218.65 429.188 225.855 448.449 237.561C467.562 219.271 500.532 207.19 538 207.19C562.675 207.19 585.399 212.429 603.5 221.232C621.601 212.429 644.325 207.19 669 207.19C694.314 207.19 717.576 212.705 735.898 221.923C746.321 219.798 757.447 218.65 769 218.65C795.322 218.65 819.424 224.612 838.062 234.501C857.682 220.28 886.666 211.283 919 211.283C945.322 211.283 969.424 217.245 988.062 227.134C1007.68 212.913 1036.67 203.916 1069 203.916C1095.32 203.916 1119.42 209.878 1138.06 219.767C1157.68 205.546 1186.67 196.549 1219 196.549C1226.89 196.549 1234.59 197.085 1241.99 198.102C1257.16 192.935 1274.53 190 1293 190C1319.31 190 1343.4 195.956 1362.03 205.835C1376.37 197.336 1393.11 192.456 1411 192.456C1439.67 192.456 1465.41 204.996 1483 224.879Z" fill="#A3DDEB"/>
+            <path id="skyTree" fill-rule="evenodd" clip-rule="evenodd" d="M1483 224.879V1133H0V201.769C14.9373 197.901 31.738 195.73 49.5 195.73C87.7656 195.73 121.569 205.808 141.893 221.207C161.021 209.974 186.73 203.097 215 203.097C253.013 203.097 286.396 215.532 305.376 234.27C323.952 224.519 347.884 218.65 374 218.65C402.936 218.65 429.188 225.855 448.449 237.561C467.562 219.271 500.532 207.19 538 207.19C562.675 207.19 585.399 212.429 603.5 221.232C621.601 212.429 644.325 207.19 669 207.19C694.314 207.19 717.576 212.705 735.898 221.923C746.321 219.798 757.447 218.65 769 218.65C795.322 218.65 819.424 224.612 838.062 234.501C857.682 220.28 886.666 211.283 919 211.283C945.322 211.283 969.424 217.245 988.062 227.134C1007.68 212.913 1036.67 203.916 1069 203.916C1095.32 203.916 1119.42 209.878 1138.06 219.767C1157.68 205.546 1186.67 196.549 1219 196.549C1226.89 196.549 1234.59 197.085 1241.99 198.102C1257.16 192.935 1274.53 190 1293 190C1319.31 190 1343.4 195.956 1362.03 205.835C1376.37 197.336 1393.11 192.456 1411 192.456C1439.67 192.456 1465.41 204.996 1483 224.879Z" fill="#A3DDEB"/>
         </svg>
     </div>
 </div>
@@ -400,8 +425,8 @@
     </div>
 </div>
 
-<div style="background-color: #76912F; height: 80vh; position: relative; z-index:100; display: flex; flex-direction: row; align-items: center; justify-content: space-evenly;">
-    <div id="ChameleonTongue" style="position: absolute; top: 0; left: 0; transform: rotate(12.36deg) translate(-7%, 13%); filter: drop-shadow(-5px 5px 0px rgba(0, 0, 0, 0.25)); z-index: 110;">
+<div style="background-color: #76912F; position: relative; z-index:100; display: flex; flex-direction: row; align-items: center; justify-content: space-evenly;">
+    <div id="ChameleonTongue" style="position: absolute; top: 0; left: 0; transform: rotate(12.36deg) translate(-7%, 5%); filter: drop-shadow(-5px 5px 0px rgba(0, 0, 0, 0.25)); z-index: 110;">
         <svg width="919" height="246" viewBox="0 0 919 246" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M327.496 210.582C332.626 214.232 338.308 219.578 344.847 225.806C345.737 226.653 346.673 225.777 345.859 224.858C338.903 216.999 331.634 209.351 331.109 207.04C341.237 208.727 365.164 214.967 362.299 246C327.252 239.422 327.496 210.582 327.496 210.582Z" fill="#7E9B24"/>
             <path d="M361.817 187.361C364.12 175.884 375.836 153.536 404.279 155.965C404.784 166.784 397.876 188.649 366.198 189.565C370.382 185.127 376.299 179.317 381.217 174.633C382.097 173.795 381.071 172.465 380.082 173.172C372.977 178.249 367.597 183.188 361.817 187.361Z" fill="#7E9B24"/>
@@ -426,7 +451,7 @@
         </svg>
     </div>
 
-    <div style="background: linear-gradient(137deg, #f0f6f5 50%, #f3f5f6 100%); margin: 150px 0 75px 0; max-width: 1000px; border-radius: 18px; box-shadow: 0 4px 24px #0002; padding: 48px 32px; color: #234a1a; font-family: 'Segoe UI', 'Arial', sans-serif; position: relative; display: flex; flex-direction: column;">
+    <div id="ChameleonTongueText" style="background: linear-gradient(137deg, #f0f6f5 50%, #f3f5f6 100%); margin: 150px 0 75px 0; max-width: 1000px; border-radius: 18px; box-shadow: 0 4px 24px #0002; padding: 48px 32px; color: #234a1a; font-family: 'Segoe UI', 'Arial', sans-serif; position: relative; display: flex; flex-direction: column;">
         <h2 style="color: #1a3713; font-size: 2em; font-weight: bold; margin-bottom: 18px; letter-spacing: 0.02em; text-align: left;">
             The chameleon's tongue
         </h2>
@@ -442,7 +467,7 @@
 
 <div style="background-color: #f8ffe7; position: relative; z-index:100; display: flex; flex-direction: row; align-items: center; justify-content: space-evenly;">
     <div id="ChameleonDangerText" style="background: linear-gradient(137deg, #2f9186 50%, #19535d 100%); gap: 50px; margin: 100px 0; max-width: 1000px; border-radius: 18px; box-shadow: 0 4px 24px #0002; padding: 48px 32px; color: #234a1a; font-family: 'Segoe UI', 'Arial', sans-serif; position: relative; text-align: center; display: flex; flex-direction: row-reverse;">
-        <div style="width: 300px; height: 300px; display: flex; flex: 1; align-items: center; justify-content: center; position: relative;">
+        <div id="graphDanger" style="width: 300px; height: 300px; display: flex; flex: 1; align-items: center; justify-content: center; position: relative;">
             <svg width="506" height="506" viewBox="0 0 506 506" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 100%; width: 100%;">
                 <circle cx="253" cy="253" r="250" fill="white"/>
                 <mask id="path-2-inside-1_48_12" fill="white">
@@ -530,8 +555,16 @@
 </div>
 
 
-<div style="background-color: #f8ffe7; height: 250px; position: relative; z-index:100;">
-    <div class="border-white"></div>
+<div style="background-color: #f8ffe7; height: 300px; position: relative; z-index:100; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-wrap: nowrap;">
+    <h3 style="font-size: 1.25em; margin-bottom: 25px; color: #060a06;">Are you ready to challenge me and prove your skills?</h3>
+    <button onclick={interactionPage} class="big-button" style="background: {unlockInteraction ? '#90ad28' : '#8e8e8e'}; color: #fff; font-size: 1.35em; font-weight: bold; padding: 18px 48px; border: none; border-radius: 16px; box-shadow: 7px 7px 0px {unlockInteraction ? '#627814' : '#3b3b3b'}; cursor: pointer; letter-spacing: 0.04em; transition: all 0.15s ease-in-out; margin: 0 auto; display: flex; flex-direction: row; align-items: center; gap: 10px;">
+        <span class="material-symbols-outlined bannerIcon" style="font-weight: bold;">{unlockInteraction ? 'lock_open_right' : 'lock'}</span> Meet Chameleon
+    </button>
+    <p style="margin: 20px; text-align: center; color: #00000094;">Read the site content to unlock it. ({unlockLevel}%)</p>
+</div>
+
+<div style="background-color: #76912F; height: 250px; position: relative; z-index:100;">
+    <div class="border"></div>
 
     <div style="position: absolute; bottom: 0; left: 0; right: 0; filter: drop-shadow(-5px 5px 0px rgba(0, 0, 0, 0.25)); z-index: 110; display: flex; flex-direction: column; align-items: center; height: 60%; margin-bottom: 15px;">
         <svg width="932" height="318" viewBox="0 0 932 318" fill="none" xmlns="http://www.w3.org/2000/svg">

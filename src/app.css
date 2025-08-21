@@ -31,13 +31,14 @@ html, body {
   overflow-x: hidden;
   position: relative;
   width: 100%;
+  height: 100%;
 
   font-size: 16px;
 }
 
 body,
-.sky {
-  background: #B1F7EB;
+.tree {
+  background: #76912F;
 }
 
 ::selection {
@@ -93,27 +94,16 @@ h1 {
 }
 
 
-/* body { */
-  /* background: #1A1A2E;
-  background: #1B263B;
-  background: #FFD6D1;
-  background: #B3E5FC;
-  background: #81D4FA;
-  background: #4FC3F7; */
-
-  /* background: #29B6F6; */
-  /* background: #03A9F4; */
-  /* background: #0288D1; */
-
-  /* background: #2C3E50;
-  background: #1B263B;
-  background: #1A1A2E; */
-/* } */
-
 
 @media (max-width: 1292px) {
   #ChameleonUpsideDown {
     transform: rotate(12.36deg) translate(33%, 15%) !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  #ChameleonTongue{
+    transform: rotate(12.36deg) translate(-7%, -5%) !important;
   }
 }
 
@@ -182,10 +172,24 @@ h1 {
   #ChameleonDangerText > div {
     max-width: 100% !important;
   }
+
+  #graphDanger {
+    width: 250px !important;
+    height: 250px !important;
+  }
 }
 
 @media (max-width: 320px) {
   #ChameleonTongue {
     display: none !important;
+  }
+  
+  #ChameleonTongueText {
+    margin: 85px 0 75px 0 !important;
+  }
+
+  #graphDanger {
+    width: 200px !important;
+    height: 200px !important;
   }
 }
