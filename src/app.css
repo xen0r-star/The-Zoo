@@ -1,11 +1,30 @@
 @import 'tailwindcss';
 
-/* html {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  scrollbar-width: thin;
-  scrollbar-color: #6f861e #cfe23f00;
-} */
+
+:root {
+    --primary: #76912f;
+    --secondary: #f8ffe7;
+    --tertiary: #fcfdff;
+
+    --white-gradient: linear-gradient(137deg, #f0f6f5 50%, #f3f5f6 100%);
+    --red-gradient: linear-gradient(137deg, #912f2f 50%, #5d193f 100%);
+    --blue-gradient: linear-gradient(137deg, #2f9186 50%, #19535d 100%);
+
+    --white-text: #ffffff;
+    --black-text: #060a06;
+    --important-text: #ff8d8d;
+    --secondary-text: #515151;
+    --tertiary-text: #dedede;
+}
+
+
+html,
+body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* scrollbar-width: thin; */
+    /* scrollbar-color: #6f861e #cfe23f00; */
+}
 
 /* html::-webkit-scrollbar {
   width: 10px;
@@ -22,174 +41,286 @@ html::-webkit-scrollbar-thumb:hover {
   background: #6f861e;
 } */
 
-/* html::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-} */
+html::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
 
-html, body {
-  overflow-x: hidden;
-  position: relative;
-  width: 100%;
-  height: 100%;
+html,
+body {
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
 
-  font-size: 16px;
+    font-size: 16px;
 }
 
 body,
 .tree {
-  background: #76912F;
+    background: #81D4FA;
 }
 
 ::selection {
-  background: #CEE23F;
-  color: #083537;
-  border-radius: 15px;
+    background: #CEE23F;
+    color: #083537;
+    border-radius: 15px;
 }
 
 .title::selection {
-  text-shadow: 6px 6px 0px #222b0548;
+    text-shadow: 6px 6px 0px #222b0548;
 }
 
 
 .title {
-  text-align: center;
+    text-align: center;
 
-  font-family: 'Jua';
-  font-style: normal;
-  font-size: 10vw;
-  line-height: 188px;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  font-weight: bold;
+    font-family: 'Jua';
+    font-style: normal;
+    font-size: 10vw;
+    line-height: 188px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-weight: bold;
 
-  color: #CEE23F;
-  text-shadow: 6px 6px 0px #6f861e;
+    color: #CEE23F;
+    text-shadow: 6px 6px 0px #6f861e;
 }
 
 h1 {
-  font-family: 'Jua';
-  font-style: normal;
-  font-size: 2rem;
-  font-weight: bold;
-  line-height: 1;
+    font-family: 'Jua';
+    font-style: normal;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1;
 
-  text-shadow: 4px 4px 0px #00000055;
+    text-shadow: 4px 4px 0px #00000055;
 }
 
 .button {
-  cursor: pointer;
-  border-radius: 98989004px;
-  background: #0000004f;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  padding: 5px;
+    cursor: pointer;
+    border-radius: 98989004px;
+    background: #0000004f;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 5px;
 }
 
 .button:hover {
-  background: #0000007f;
+    background: #0000007f;
 }
 
+.heart-anim {
+    position: absolute;
+    pointer-events: none;
+    animation: heart-float 1.5s ease-in-out forwards;
+    z-index: 1000;
+}
+
+
+/* animation rotate */
+@keyframes rotate {
+
+    0%,
+    25% {
+        transform: rotate(0deg);
+    }
+
+    75%,
+    100% {
+        transform: rotate(90deg);
+    }
+}
+
+@keyframes down {
+    50% {
+        top: 0;
+    }
+
+    99% {
+        top: 100%;
+    }
+
+    100% {
+        display: none;
+    }
+}
+
+@keyframes heart-float {
+    0% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+
+    70% {
+        opacity: 1;
+        transform: translateY(-40px);
+    }
+
+    85% {
+        opacity: 1;
+        transform: translateY(-60px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-60px);
+    }
+}
+
+
+
+@media (orientation: portrait) and (max-width: 768px) {
+    #rotate-warning {
+        display: flex !important;
+    }
+}
 
 
 @media (max-width: 1292px) {
-  #ChameleonUpsideDown {
-    transform: rotate(12.36deg) translate(33%, 15%) !important;
-  }
+    #ChameleonUpsideDown {
+        transform: rotate(12.36deg) translate(33%, 15%) !important;
+    }
+}
+
+@media (max-width: 1184px) {
+    #PositionChameleon {
+        transform: rotate(9deg) translate(36%, -16%) !important;
+    }
+
+    #chameleonText {
+        bottom: 310px !important;
+        margin-right: 20px !important;
+    }
 }
 
 @media (max-width: 1024px) {
-  #ChameleonTongue{
-    transform: rotate(12.36deg) translate(-7%, -5%) !important;
-  }
+    #ChameleonTongue {
+        transform: rotate(12.36deg) translate(-7%, -5%) !important;
+    }
+
+    #scoreboard {
+        font-size: .9em !important;
+    }
 }
 
 @media (max-width: 898px) {
-  #ChameleonUpsideDown {
-    transform: rotate(12.36deg) translate(50%, 15%) !important;
-  }
+    #ChameleonUpsideDown {
+        transform: rotate(9deg) translate(52%, -5%) !important;
+    }
+}
+
+@media (max-width: 842px) {
+    #PositionChameleon {
+        transform: rotate(9deg) translate(40%, -16%) !important;
+    }
+
+    #chameleonText {
+        bottom: 300px !important;
+        margin-right: 5px !important;
+    }
 }
 
 @media (max-width: 768px) {
-  h1 {
-    font-size: 1.5rem;
-  }
+    h1 {
+        font-size: 1.5rem;
+    }
 
-  #IdCard {
-    flex-direction: column !important;
-    gap: 20px !important;
-  }
+    #IdCard {
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
 
-  #IdCardText {
-    width: 100% !important;
-    border-top: solid 2px gray !important;
-    padding-top: 15px !important;
-  }
+    #IdCardText {
+        width: 100% !important;
+        border-top: solid 2px gray !important;
+        padding-top: 15px !important;
+    }
 
-  #IdCardBarCode {
-    text-align: center !important;
-    width: 100% !important;
-  }
+    #IdCardBarCode {
+        text-align: center !important;
+        width: 100% !important;
+    }
+
+    #PositionChameleon {
+        transform: rotate(9deg) translate(58%, 0%) !important;
+    }
+
+    #chameleonText {
+        bottom: 258px !important;
+        margin-right: 5px !important;
+    }
+
+    #chameleonText::after {
+        right: 30px !important;
+        border-left: 25px solid #00000000 !important;
+        border-right: none !important;
+    }
 }
 
 @media (max-width: 710px) {
-  #ChameleonDangerText {
-    flex-direction: column-reverse !important;
-    align-items: center;
-  }
+    #ChameleonDangerText {
+        flex-direction: column-reverse !important;
+        align-items: center;
+    }
 
-  #UICNLink {
-    position: relative !important;
-  }
+    #UICNLink {
+        position: relative !important;
+    }
 }
 
 @media (max-width: 616px) {
-  #ChameleonUpsideDown {
-    display: none !important;
-  }
+    #ChameleonUpsideDown {
+        display: none !important;
+    }
 
-  #FascinatingCamouflageText {
-    max-width: 100% !important;
-  }
+    #FascinatingCamouflageText {
+        max-width: 100% !important;
+    }
 }
 
 @media (max-width: 425px) {
-  #PositionChameleon {
-    right: -140px !important;
-  }
+    #PositionChameleon {
+        right: -140px !important;
+    }
 
-  #ChameleonUpsideDown {
-    display: none !important;
-  }
+    #ChameleonUpsideDown {
+        display: none !important;
+    }
 
-  #ChameleonTongue{
-    transform: rotate(12.36deg) translate(-18%, -10%) !important;
-  }
+    #ChameleonTongue {
+        transform: rotate(12.36deg) translate(-18%, -10%) !important;
+    }
 
-  #ChameleonDangerText > div {
-    max-width: 100% !important;
-  }
+    #ChameleonDangerText>div {
+        max-width: 100% !important;
+    }
 
-  #graphDanger {
-    width: 250px !important;
-    height: 250px !important;
-  }
+    #graphDanger {
+        width: 250px !important;
+        height: 250px !important;
+    }
 }
 
 @media (max-width: 320px) {
-  #ChameleonTongue {
-    display: none !important;
-  }
-  
-  #ChameleonTongueText {
-    margin: 85px 0 75px 0 !important;
-  }
+    #ChameleonTongue {
+        display: none !important;
+    }
 
-  #graphDanger {
-    width: 200px !important;
-    height: 200px !important;
-  }
+    #ChameleonTongueText {
+        margin: 85px 0 75px 0 !important;
+    }
+
+    #graphDanger {
+        width: 200px !important;
+        height: 200px !important;
+    }
 }

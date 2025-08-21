@@ -1,0 +1,42 @@
+{
+    "green": {
+        "color1": "#6E8823",
+        "color2": "#90AD28",
+        "color3": "#8EA628",
+        "color4": "#E3E63B",
+        "color5": "#B8CC2B",
+        "color6": "#76821B"
+    },
+    "red": {
+        "color1": "#882325",
+        "color2": "#AD282A",
+        "color3": "#A6282A",
+        "color4": "#E63B3E",
+        "color5": "#CC2B2E",
+        "color6": "#821B1D"
+    },
+    "purple": {
+        "color1": "#88237E",
+        "color2": "#AD28A0",
+        "color3": "#A62899",
+        "color4": "#E63BD5",
+        "color5": "#CC2BBC",
+        "color6": "#821B78"
+    },
+    "blue": {
+        "color1": "#235988",
+        "color2": "#286FAD",
+        "color3": "#286BA6",
+        "color4": "#3B96E6",
+        "color5": "#2B81CC",
+        "color6": "#1B5282"
+    },
+    "yellow": {
+        "color1": "#6E8823",
+        "color2": "#90AD28",
+        "color3": "#8EA628",
+        "color4": "#E3E63B",
+        "color5": "#B8CC2B",
+        "color6": "#76821B"
+    }
+}
