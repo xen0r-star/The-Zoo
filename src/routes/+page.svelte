@@ -527,7 +527,7 @@
 
     <div style="transition: transform .65s ease-in-out; width: 100vw; height: 100%; transform: translateX(calc((50% - ((80vw + 50px) / 2)) - (80vw + 50px) * {currentFacts})); display: flex; flex-direction: row; flex-wrap: nowrap;">
         {#each facts as fact, index}
-            <div style="background: {fact.background}; color: var(--white-text); width: 80vw; height: 80%; padding: 25px; display: flex; flex-direction: column; justify-content: flex-start; margin: auto 25px; border-radius: 15px; flex-shrink: 0;">
+            <div class="cardSlider" style="background: {fact.background}; justify-content: center; color: var(--white-text); width: 80vw; height: 80%; padding: 25px; padding-inline: 100px; display: flex; flex-direction: column; margin: auto 25px; border-radius: 15px; flex-shrink: 0;">
                 <h2 style="font-size: 2.2em; font-weight: bold; margin: 0 0 0.5em 0; text-shadow: 2px 2px 0 #0000004a; text-align: center;">{fact.title}</h2>
                 <p style="font-size: 1.15em; margin: 0 0 1em 0; text-align: center; line-height: 1.5;">{fact.description}</p>
                 <span style="font-size: 8em; display: block; margin: 0 auto; transition: color 0.3s;" class="material-symbols-outlined bannerIcon">{fact.icon}</span>

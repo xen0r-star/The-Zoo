@@ -510,7 +510,7 @@
     </svg>
 </div>
 
-<button class="button" aria-label="Back to home" style="cursor: pointer; position: absolute; top: 0; left: 0; transform: rotate(90deg); z-index: 15; margin: 15px; margin-top: 80px;" onclick={() => window.location.href = '/'}>
+<button class="button" aria-label="Back to home" style="cursor: pointer; position: absolute; top: 0; left: 0; transform: rotate(90deg); z-index: 15; margin: 15px; margin-top: 80px;" onclick={() => window.location.href = '/The-Zoo/'}>
     <svg width="50" height="50" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M88 145.792L127.5 189M127.5 189L127.5 67M127.5 189L167 145.792" stroke="#ffffffd1" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>

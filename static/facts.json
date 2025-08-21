@@ -1,36 +1,36 @@
 [
     {
-        "title": "Thermorégulation passive",
+        "title": "Passive thermoregulation",
         "icon": "wb_sunny",
-        "description": "Le caméléon n'a pas besoin de transpirer ni de haleter comme certains animaux pour réguler sa température. Il se contente de se déplacer entre les zones ensoleillées et ombragées, absorbant la chaleur du soleil ou au contraire se réfugiant à l'ombre. Sa peau et ses changements de couleur jouent aussi un rôle : en devenant plus foncé, il capte davantage de chaleur, et en s'éclaircissant, il en reflète une partie. C'est un véritable maître de l'économie d'énergie, comme une « pile vivante » qui se recharge à la lumière.",
+        "description": "Chameleons do not need to sweat or pant like some animals to regulate their temperature. They simply move between sunny and shady areas, absorbing heat from the sun or seeking refuge in the shade. Its skin and color changes also play a role: by becoming darker, it absorbs more heat, and by lightening, it reflects some of it.",
         "chameleonColor": "yellow",
         "background": "#E3CD0F"
     },
     {
-        "title": "Perception UV",
+        "title": "UV perception",
         "icon": "eyeglasses_2",
-        "description": "Les yeux du caméléon sont extraordinairement sensibles : ils peuvent voir non seulement dans le spectre visible comme nous, mais aussi dans l'ultraviolet. Cela lui donne accès à un monde de signaux invisibles pour l'homme. Par exemple, certains insectes réfléchissent la lumière UV, ce qui les rend plus faciles à repérer. Cette vision unique joue aussi un rôle dans la communication entre caméléons, car certains reflets sur leur peau ne sont perceptibles qu'en ultraviolet.",
+        "description": "Chameleons have extraordinarily sensitive eyes: they can see not only in the visible spectrum like us, but also in the ultraviolet spectrum. This gives them access to a world of signals that are invisible to humans. For example, some insects reflect UV light, making them easier to spot. This unique vision also plays a role in communication between chameleons, as some reflections on their skin are only visible in ultraviolet light.",
         "chameleonColor": "purple",
         "background": "#912F8E"
     },
     {
-        "title": "Stress et émotions visibles",
+        "title": "Stress and visible emotions",
         "icon": "palette",
-        "description": "Le corps du caméléon reflète directement son état émotionnel. Lorsqu'il est stressé, menacé ou en colère, sa peau peut s'assombrir jusqu'à devenir presque noire. À l'inverse, en période de calme ou lors des parades amoureuses, il peut arborer des couleurs éclatantes et vives. Sa peau agit comme un écran émotionnel, rendant visibles ses tensions ou ses intentions. Cela lui permet d'avertir un rival, d'attirer un partenaire ou de dissuader un prédateur.",
+        "description": "The chameleon's body directly reflects its emotional state. When stressed, threatened, or angry, its skin can darken to almost black. Conversely, when calm or during courtship displays, it can display bright, vivid colors. Its skin acts as an emotional screen, revealing its tensions or intentions. This allows it to warn a rival, attract a mate, or deter a predator.",
         "chameleonColor": "red",
         "background": "#912F2F"
     },
     {
-        "title": "Le roi du ralenti",
+        "title": "The king of slow motion",
         "icon": "hourglass",
-        "description": "La démarche du caméléon est si lente et calculée qu'il semble parfois figé dans le temps. Il avance en balançant son corps d'avant en arrière pour imiter le mouvement des feuilles dans le vent, ce qui le rend presque invisible pour les prédateurs et ses proies. Ce rythme paisible est si marqué qu'il arrive que des insectes se posent ou grimpent sur lui sans qu'il réagisse immédiatement. Mais quand il s'agit de chasser, tout change : sa langue fulgurante peut alors jaillir en moins d'une seconde.",
+        "description": "The chameleon's movements are so slow and deliberate that it sometimes seems frozen in time. It moves forward by swaying its body back and forth to mimic the movement of leaves in the wind, making it almost invisible to predators and prey. This peaceful rhythm is so pronounced that insects sometimes land on or climb onto it without it reacting immediately. But when it comes to hunting, everything changes: its lightning-fast tongue can shoot out in less than a second.",
         "chameleonColor": "blue",
         "background": "#2F8491"
     },
     {
-        "title": "Queue préhensile",
+        "title": "Prehensile tail",
         "icon": "eco",
-        "description": "La queue du caméléon est bien plus qu'un simple appendice : elle agit comme une cinquième main. Totalement préhensile, elle peut s'enrouler fermement autour des branches, offrant une sécurité supplémentaire quand il grimpe dans les arbres. Grâce à cette queue, il peut rester suspendu tête en bas ou stabiliser son corps pendant qu'il vise une proie. C'est un atout vital pour un animal arboricole, qui passe la majorité de sa vie en hauteur.",
+        "description": "The chameleon's tail is much more than just an appendage: it acts as a fifth hand. Fully prehensile, it can wrap itself tightly around branches, providing extra security when climbing trees. Thanks to this tail, it can hang upside down or stabilize its body while targeting prey. This is a vital asset for an arboreal animal that spends most of its life high up in the trees.",
         "chameleonColor": "green",
         "background": "#76912F"
     }

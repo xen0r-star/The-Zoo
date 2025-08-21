@@ -287,6 +287,12 @@ h1 {
     }
 }
 
+@media (max-width: 562px) {
+    .cardSlider {
+        padding-inline: 25px !important;
+    }
+}
+
 @media (max-width: 425px) {
     #PositionChameleon {
         right: -140px !important;
@@ -311,6 +317,15 @@ h1 {
 
     .title {
         text-shadow: 3px 3px 0px #6f861e !important;
+    }
+
+    .cardSlider {
+        height: unset !important;
+        margin-block: 10px !important;
+    }
+
+    .cardSlider h2 {
+        font-size: 1.5em !important;
     }
 }
 
