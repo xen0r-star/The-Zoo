@@ -8,12 +8,12 @@
         "color6": "#76821B"
     },
     "red": {
-        "color1": "#882325",
-        "color2": "#AD282A",
-        "color3": "#A6282A",
-        "color4": "#E63B3E",
-        "color5": "#CC2B2E",
-        "color6": "#821B1D"
+        "color1": "#9F2C2E",
+        "color2": "#BF393B",
+        "color3": "#B03335",
+        "color4": "#A7393B",
+        "color5": "#E9373A",
+        "color6": "#9E292B"
     },
     "purple": {
         "color1": "#88237E",
@@ -32,11 +32,11 @@
         "color6": "#1B5282"
     },
     "yellow": {
-        "color1": "#6E8823",
-        "color2": "#90AD28",
-        "color3": "#8EA628",
-        "color4": "#E3E63B",
-        "color5": "#B8CC2B",
-        "color6": "#76821B"
+        "color1": "#A1861A",
+        "color2": "#C9A721",
+        "color3": "#C8A518",
+        "color4": "#CD9F14",
+        "color5": "#EBC118",
+        "color6": "#BB7410"
     }
 }

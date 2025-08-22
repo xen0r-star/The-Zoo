@@ -1,5 +1,19 @@
 [
     {
+        "title": "Prehensile tail",
+        "icon": "eco",
+        "description": "The chameleon's tail is much more than just an appendage: it acts as a fifth hand. Fully prehensile, it can wrap itself tightly around branches, providing extra security when climbing trees. Thanks to this tail, it can hang upside down or stabilize its body while targeting prey. This is a vital asset for an arboreal animal that spends most of its life high up in the trees.",
+        "chameleonColor": "green",
+        "background": "#397e13"
+    },
+    {
+        "title": "Stress and visible emotions",
+        "icon": "palette",
+        "description": "The chameleon's body directly reflects its emotional state. When stressed, threatened, or angry, its skin can darken to almost black. Conversely, when calm or during courtship displays, it can display bright, vivid colors. Its skin acts as an emotional screen, revealing its tensions or intentions. This allows it to warn a rival, attract a mate, or deter a predator.",
+        "chameleonColor": "red",
+        "background": "#912F2F"
+    },
+    {
         "title": "Passive thermoregulation",
         "icon": "wb_sunny",
         "description": "Chameleons do not need to sweat or pant like some animals to regulate their temperature. They simply move between sunny and shady areas, absorbing heat from the sun or seeking refuge in the shade. Its skin and color changes also play a role: by becoming darker, it absorbs more heat, and by lightening, it reflects some of it.",
@@ -14,24 +28,10 @@
         "background": "#912F8E"
     },
     {
-        "title": "Stress and visible emotions",
-        "icon": "palette",
-        "description": "The chameleon's body directly reflects its emotional state. When stressed, threatened, or angry, its skin can darken to almost black. Conversely, when calm or during courtship displays, it can display bright, vivid colors. Its skin acts as an emotional screen, revealing its tensions or intentions. This allows it to warn a rival, attract a mate, or deter a predator.",
-        "chameleonColor": "red",
-        "background": "#912F2F"
-    },
-    {
         "title": "The king of slow motion",
         "icon": "hourglass",
         "description": "The chameleon's movements are so slow and deliberate that it sometimes seems frozen in time. It moves forward by swaying its body back and forth to mimic the movement of leaves in the wind, making it almost invisible to predators and prey. This peaceful rhythm is so pronounced that insects sometimes land on or climb onto it without it reacting immediately. But when it comes to hunting, everything changes: its lightning-fast tongue can shoot out in less than a second.",
         "chameleonColor": "blue",
         "background": "#2F8491"
-    },
-    {
-        "title": "Prehensile tail",
-        "icon": "eco",
-        "description": "The chameleon's tail is much more than just an appendage: it acts as a fifth hand. Fully prehensile, it can wrap itself tightly around branches, providing extra security when climbing trees. Thanks to this tail, it can hang upside down or stabilize its body while targeting prey. This is a vital asset for an arboreal animal that spends most of its life high up in the trees.",
-        "chameleonColor": "green",
-        "background": "#76912F"
     }
 ]

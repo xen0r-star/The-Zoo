@@ -1,38 +1,38 @@
-# sv
+# The Zoo - Chameleon Interactive
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+This project is an interactive web page featuring a dynamic chameleon, built with SvelteKit. It was created for a contest and meets all the required guidelines.
+https://zoo.hackclub.com/
 
-## Creating a project
+## General Description
 
-If you're seeing this, you've probably already done this step. Congrats!
+The site presents a chameleon with which the user can interact in various ways. The experience is divided into two main parts:
+- A homepage with an information panel (facts) about the chameleon.
+- An interactive page where the user can play against the chameleon in a mini-game.
 
-```sh
-# create a new project in the current directory
-npx sv create
+## Information Panel
 
-# create a new project in my-app
-npx sv create my-app
-```
+On the main page, an information panel displays several facts about the chameleon (size, diet, habitat, etc.).  
+**Features:**
+- The facts are shown as cards that the user can scroll through.
+- After viewing all the facts, a "Meet Chameleon" button is unlocked, allowing access to the interactive page.
+- This panel uses the `$state` and `$derived` runes to manage progress and unlock the button.
 
-## Developing
+## Interactive Page
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+The interactive page offers a game where the user must catch flies faster than the chameleon.
 
-```sh
-npm run dev
+### External Stimulus
+- **Clicks and mouse movements**:  
+  - The user can click on the fly to score points.
+  - Moving the mouse makes the chameleon's eye follow the cursor.
+  - Clicking on the chameleon changes its color (with anti-spam protection).
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+### Internal Stimulus
+- **Time and randomness**:  
+  - The chameleon attacks the fly automatically at random intervals (function `autoChameleonAttack`).
+  - The sky color changes automatically depending on the time of day (variable `hour` and array `skyColor`).
+  - The fly's position is randomly determined within a defined area.
+  - Sometimes, the chameleon can catch the mouse instead of the fly.
 
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## Easter eggs
+- When the user clicks on the chameleon in the tree on the homepage, it makes a heart for its sweetheart in the opposite tree, and at the end of the page,

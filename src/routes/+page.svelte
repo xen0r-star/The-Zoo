@@ -522,7 +522,7 @@
     </div>
 </div>
 
-<div style="background: var(--primary); height: 90vh; position: relative; z-index:100;">
+<div id="sliders" style="background: var(--primary); height: 90vh; position: relative; z-index:100;">
     <!-- <h2></h2> -->
 
     <div style="transition: transform .65s ease-in-out; width: 100vw; height: 100%; transform: translateX(calc((50% - ((80vw + 50px) / 2)) - (80vw + 50px) * {currentFacts})); display: flex; flex-direction: row; flex-wrap: nowrap;">

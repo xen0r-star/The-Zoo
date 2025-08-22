@@ -319,6 +319,10 @@ h1 {
         text-shadow: 3px 3px 0px #6f861e !important;
     }
 
+    .sliders {
+        height: unset !important;
+    }
+
     .cardSlider {
         height: unset !important;
         margin-block: 10px !important;

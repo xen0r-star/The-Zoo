@@ -11,6 +11,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39&display=swap" rel="stylesheet">
+
+	<title>The Zoo - Chameleon</title>
 </svelte:head>
 
 {@render children?.()}
