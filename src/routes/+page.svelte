@@ -10,10 +10,25 @@
         skyColor: false,
         facts: false
     });
-
     let allLoaded = $derived(
         loaded.chameleonPalettes && loaded.skyColor && loaded.facts
     ) 
+
+
+    let loadingDots = $state('');
+    let loadingInterval: any;
+
+    $effect(() => {
+        if (!allLoaded) {
+            loadingInterval = setInterval(() => {
+                loadingDots = loadingDots.length < 3 ? loadingDots + '.' : '';
+            }, 500);
+        } else {
+            clearInterval(loadingInterval);
+        }
+    });
+
+
 
 
     type ChameleonColor = "green" | "red" | "purple" | "blue" | "yellow";
@@ -196,9 +211,9 @@
 
 <ZooBanner />
 
-<div id="loadedScreen" style="color: var(--white-text); display: flex; padding-top: 100px; transition: all 1.5s ease-in-out; height: 100vh; width: 100vw; z-index: 125; position: fixed; top: 0; left: 0; background: var(--primary); flex-direction: column; align-items: center; justify-content: flex-start; padding: 20px; padding-top: 180px; {allLoaded ? 'animation: 3.5s ease-in-out down forwards;' : ''}">
+<div id="loadedScreen" style="color: var(--white-text); display: flex; padding-top: 100px; transition: all 1.5s ease-in-out; height: 100vh; width: 100vw; z-index: 125; position: fixed; top: 0; left: 0; background: var(--primary); flex-direction: column; align-items: center; justify-content: flex-start; padding: 20px; padding-top: 180px; {allLoaded ? 'animation: 1s ease-in-out down forwards;' : ''}">
     <span class="material-symbols-outlined bannerIcon" style="font-size: 6rem; margin-bottom: 25px;">hourglass</span>
-    <h1 style="text-align: center; font-size: 2rem;">Loading...</h1>
+    <h1 style="text-align: center; font-size: 2rem;">Loading{loadingDots}</h1>
     <p style="text-align: center; font-size: 1.2rem; margin-block: 5px;">Please wait while we prepare the chameleon experience for you.</p>
 </div>
 
@@ -591,7 +606,7 @@
 <div style="background-color: var(--primary); height: 200px; position: relative; z-index:100;">
     <div class="border"></div>
 
-    <a aria-label="github - Xen0r-star" style="position: absolute; bottom: 0; right: 0; height: 50px; width: auto; opacity: 60%; margin: 10px; z-index: 100;" href="https://github.com/xen0r-star/" target="_blank">
+    <a aria-label="github - Xen0r-star" style="position: absolute; top: 0; right: 0; height: 50px; width: auto; opacity: 60%; margin: 10px; z-index: 100;" href="https://github.com/xen0r-star/" target="_blank">
         <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 100%; width: 100%;">
             <path d="M256 32C132.3 32 32 134.9 32 261.7C32 363.2 96.2 449.2 185.2 479.6C186.448 479.871 187.723 480.005 189 480C197.3 480 200.5 473.9 200.5 468.6C200.5 463.1 200.3 448.7 200.2 429.5C192.79 431.237 185.21 432.143 177.6 432.2C134.5 432.2 124.7 398.7 124.7 398.7C114.5 372.2 99.8 365.1 99.8 365.1C80.3 351.4 99.7 351 101.2 351H101.3C123.8 353 135.6 374.8 135.6 374.8C146.8 394.4 161.8 399.9 175.2 399.9C184.06 399.723 192.784 397.678 200.8 393.9C202.8 379.1 208.6 369 215 363.2C165.3 357.4 113 337.7 113 249.7C113 224.6 121.7 204.1 136 188.1C133.7 182.3 126 158.9 138.2 127.3C139.836 126.908 141.518 126.74 143.2 126.8C151.3 126.8 169.6 129.9 199.8 150.9C236.495 140.633 275.305 140.633 312 150.9C342.2 129.9 360.5 126.8 368.6 126.8C370.282 126.74 371.964 126.908 373.6 127.3C385.8 158.9 378.1 182.3 375.8 188.1C390.1 204.2 398.8 224.7 398.8 249.7C398.8 337.9 346.4 357.3 296.5 363C304.5 370.1 311.7 384.1 311.7 405.5C311.7 436.2 311.4 461 311.4 468.5C311.4 473.9 314.5 480 322.8 480C324.144 480.006 325.484 479.872 326.8 479.6C415.9 449.2 480 363.1 480 261.7C480 134.9 379.7 32 256 32Z" fill="black"/>
         </svg>

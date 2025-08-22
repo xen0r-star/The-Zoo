@@ -12,6 +12,10 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39&display=swap" rel="stylesheet">
 
+	<link rel="preload" href="/facts.json" as="fetch" type="application/json" crossorigin="anonymous">
+	<link rel="preload" href="/skyColor.json" as="fetch" type="application/json" crossorigin="anonymous">
+	<link rel="preload" href="/chameleonPalettes.json" as="fetch" type="application/json" crossorigin="anonymous">
+
 	<title>The Zoo - Chameleon</title>
 </svelte:head>
 

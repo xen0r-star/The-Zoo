@@ -136,7 +136,7 @@ h1 {
 }
 
 @keyframes down {
-    50% {
+    0% {
         top: 0;
     }
 
@@ -315,12 +315,12 @@ h1 {
         height: 250px !important;
     }
 
-    .title {
-        text-shadow: 3px 3px 0px #6f861e !important;
+    #sliders {
+        height: unset !important;
     }
 
-    .sliders {
-        height: unset !important;
+    .title {
+        text-shadow: 3px 3px 0px #6f861e !important;
     }
 
     .cardSlider {
