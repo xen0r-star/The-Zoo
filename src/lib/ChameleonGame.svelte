@@ -14,8 +14,11 @@
 	import Scoreboard from '$lib/ChameleonGame/Scoreboard.svelte';
 
 
+    const numberToWin = 15;
+    const speedFly = 1;
 
 
+    // Phrases Chameleon
     const phrases = {
         hello: [
             "Hi! Come play with me.",
@@ -24,7 +27,7 @@
         ],
         start: [
             "Show me your skills!",
-            "Who will reach 15 first?"
+            `Who will reach ${numberToWin} first?`
         ],
         pause: [
             "Taking a break?",
@@ -53,38 +56,46 @@
         ]
     };
 
+
+    // Other Functions
     function randomPhrase(type: keyof typeof phrases) {
         const arr = phrases[type];
         return arr[Math.floor(Math.random() * arr.length)];
     }
 
+    function randomInterval(min: number, max: number): number {
+        return Math.random() * (max - min) + min;
+    }
 
+
+    // Chameleon Color
     type ChameleonColor = "green" | "red" | "purple" | "blue" | "yellow";
     let chameleonPalettes = $state<Partial<Record<ChameleonColor, any>>>({});
     let chameleonColor = $state<ChameleonColor>('green');
-    let chameleonActiveColor = $derived(
-        chameleonPalettes && chameleonPalettes[chameleonColor]
-            ? chameleonPalettes[chameleonColor]
-            : { 
-                color1: "#6E8823",
-                color2: "#90AD28",
-                color3: "#8EA628",
-                color4: "#E3E63B",
-                color5: "#B8CC2B",
-                color6: "#76821B"
-            }
+    let chameleonActiveColor = $derived(chameleonPalettes && chameleonPalettes[chameleonColor]
+        ? chameleonPalettes[chameleonColor]
+        : {
+            color1: "#6E8823",
+            color2: "#90AD28",
+            color3: "#8EA628",
+            color4: "#E3E63B",
+            color5: "#B8CC2B",
+            color6: "#76821B"
+        }
     );
 
     
-    const hour = new Date().getHours();
+    // Sky Color
     let skyColor = $state([]);
     $effect(() => {
         if (skyColor.length > 0) {
+            const hour = new Date().getHours();
             document.body.style.setProperty('--sky-tree-fill', skyColor[Math.floor(hour / 2)]);
         }
     });
 
 
+    // Speech Bubble Chameleon
     let speechBubble = $state({
         text: randomPhrase('hello'),
         display: false
@@ -97,46 +108,39 @@
             }, 10000);
         }
     });
-
     $effect(() => {
         speechBubble.text;
         speechBubble.display = true;
-    })
+    });
 
     
+    // Chameleon
     let clickTimestamps: number[] = [];
     let colorClickBlocked = $state(false);
 
     function changeColorChameleon() {
-        if (isPauseGame) return;
-        if (colorClickBlocked) return;
-
+        if (isPauseGame || colorClickBlocked) return;
         const now = Date.now();
         clickTimestamps.push(now);
-
         clickTimestamps = clickTimestamps.filter(ts => now - ts < 3000);
 
         if (clickTimestamps.length > 5) {
             colorClickBlocked = true;
-
             speechBubble.text = "Heeeee! Slow down, <br>I'm not a robot.";
             chameleonColor = 'red';
 
             setTimeout(() => {
                 colorClickBlocked = false;
                 clickTimestamps = [];
-            }, 30000);
+            }, 10000);
             return;
         }
 
         const colors = Object.keys(chameleonPalettes) as ChameleonColor[];
+        if (colors.length === 0) return;
         const currentIndex = colors.indexOf(chameleonColor);
         const nextIndex = (currentIndex + 1) % colors.length;
         chameleonColor = colors[nextIndex];
-    }
-
-    function randomInterval(min: number, max: number): number {
-        return Math.random() * (max - min) + min;
     }
 
     function animateCatch(targetX: number, targetY: number) {
@@ -178,6 +182,7 @@
 
     let flyVisible = $state(true);
 
+    let inArea = false;
     function autoChameleonAttack() {
         if (isPauseGame || !flyVisible) {
             setTimeout(autoChameleonAttack, randomInterval(1000, 3000));
@@ -192,6 +197,7 @@
             animateCatch(flyX, flyY);
         }
         
+        const hour = new Date().getHours();
         const isDay = hour >= 8 && hour < 20;
         const chance = isDay ? 4/10 : 3/10;
 
@@ -201,13 +207,78 @@
         setTimeout(autoChameleonAttack, randomInterval(1000, 3000));
     }
 
-   
 
+    // Fly
+    function moveFly(appearFromOutside = false) {
+        const fly = document.getElementById('fly');
+        const catchZone = document.getElementById('catchZone');
+        if (!fly || !catchZone) return;
+
+        const zoneRect = catchZone.getBoundingClientRect();
+        const flyWidth = fly.offsetWidth || 50;
+        const flyHeight = fly.offsetHeight || 50;
+
+        let lastFlyX = (fly as any).lastFlyX ?? (zoneRect.left + zoneRect.width / 2);
+        let lastFlyY = (fly as any).lastFlyY ?? (zoneRect.top + zoneRect.height / 2);
+
+        let flyX, flyY;
+        if (appearFromOutside) {
+            flyX = zoneRect.left + Math.random() * (zoneRect.width - flyWidth);
+            flyY = zoneRect.top - flyHeight - 20;
+            
+            const targetX = zoneRect.left + Math.random() * (zoneRect.width - flyWidth);
+            const targetY = zoneRect.top + Math.random() * (zoneRect.height - flyHeight);
+
+            fly.style.transition = 'none';
+            fly.style.left = `${flyX}px`;
+            fly.style.top = `${flyY}px`;
+            
+            void fly.offsetWidth; // forcing reflow
+
+            fly.style.transition = 'left 0.7s cubic-bezier(.5,1.5,.5,1), top 0.7s cubic-bezier(.5,1.5,.5,1)';
+            setTimeout(() => {
+                fly.style.left = `${targetX}px`;
+                fly.style.top = `${targetY}px`;
+
+                (fly as any).lastFlyX = targetX;
+                (fly as any).lastFlyY = targetY;
+            }, 10);
+
+        } else if (!isPauseGame) {
+            let tries = 0;
+            let minDistance = 80;
+            do {
+                flyX = zoneRect.left + Math.random() * (zoneRect.width - flyWidth);
+                flyY = zoneRect.top + Math.random() * (zoneRect.height - flyHeight);
+                tries++;
+            } while (
+                Math.abs(flyX - lastFlyX) < minDistance && 
+                Math.abs(flyY - lastFlyY) < minDistance && 
+                tries < 20
+            );
+
+            fly.style.transition = `left ${speedFly}s linear, top ${speedFly}s linear`;
+            fly.style.transform = flyX < lastFlyX ? "scaleX(1)" : "scaleX(-1)";
+            
+            fly.style.left = `${flyX}px`;
+            fly.style.top = `${flyY}px`;
+
+            (fly as any).lastFlyX = flyX;
+            (fly as any).lastFlyY = flyY;
+        }
+
+        setTimeout(() => moveFly(false), Math.random() * 1000 + 500);
+    }
+
+    
+    // Score
     let playerScore = $state(0);
     let chameleonScore = $state(0);
     let gameEnd = $state(false);
     function catchFly(type: string) {
         if (isPauseGame || !flyVisible) return;
+
+        console.log(type, "caught the fly!");
 
         if (type === 'player') {
             playerScore += 1;
@@ -215,23 +286,38 @@
             chameleonScore += 1;
         }
 
-        if (playerScore >= 15) {
+        if (playerScore >= numberToWin) {
             isPauseGame = true;
             gameEnd = true;
             speechBubble.text = randomPhrase('win');
             return;
 
-        } else if (chameleonScore >= 15) {
+        } else if (chameleonScore >= numberToWin) {
             isPauseGame = true;
             gameEnd = true;
             speechBubble.text = randomPhrase('lose');
             return;
         }
 
+        console.log("Scores:", playerScore, chameleonScore);    
+
         flyVisible = false;
         setTimeout(() => {
             flyVisible = true;
+            moveFly(true);
         }, 700);
+    }
+
+
+    // Game State
+    let showStartScreen = $state(true);
+    function startGame() {
+        showStartScreen = false;
+        playerScore = 0;
+        chameleonScore = 0;
+        isPauseGame = false;
+        chameleonColor = 'green';
+        speechBubble.text = randomPhrase('start');
     }
 
     function restartGame() {
@@ -255,16 +341,6 @@
         }
     }
 
-    let showStartScreen = $state(true);
-    function startGame() {
-        showStartScreen = false;
-        playerScore = 0;
-        chameleonScore = 0;
-        isPauseGame = false;
-        chameleonColor = 'green';
-        speechBubble.text = randomPhrase('start');
-    }
-
     function endGame() {
         playerScore = 0; 
         chameleonScore = 0; 
@@ -273,7 +349,7 @@
     }
 
 
-
+    // On Mount
     let cooldownCatching = $state(Date.now() + randomInterval(10000, 15000));
     let tongueStart = { x: 120, y: 144 };
     let tongueEnd = $state({ x: 120, y: 144 });
@@ -281,7 +357,6 @@
     $effect(() => {
         console.log("New time for cooldown:", new Date(cooldownCatching).toLocaleTimeString());
     });
-
 
     let eyeOffsetX = $state(0);
     let eyeOffsetY = $state(0);
@@ -294,128 +369,72 @@
     const minY = -3;
     const maxY = 5;
 
-    onMount(function() {
-        // Recover data ---------------------------------------
-        fetch(`${ base }/skyColor.json`)
-        .then(response => response.json())
-        .then(data => {
-            skyColor = data;
-            // loaded = true;
-        });
-
-        fetch(`${ base }/chameleonPalettes.json`)
-        .then(response => response.json())
-        .then(data => {
-            chameleonPalettes = data;
-            // loaded = true;
-        });
-
-        // Initialize elements -------------------------
+    function updateTongueStart() {
         const element = document.getElementById('startTongue');
-        const catchZone = document.getElementById('catchZone');
-        const eye = document.getElementById('eye-chameleon1');
-        const fly = document.getElementById('fly');
-        
-        // Tongue --------------------------------------
-        const updateTongueStart = () => {
-            if (element) {
-                const bbox = element.getBoundingClientRect();
-                tongueStart.x = bbox.left + bbox.width / 2 + window.scrollX;
-                tongueStart.y = bbox.top + bbox.height / 2 + window.scrollY;
-                tongueEnd.x = tongueStart.x;
-                tongueEnd.y = tongueStart.y;
-            }
-        };
-
-        updateTongueStart();
-        window.addEventListener('resize', updateTongueStart);
-
-        
-        let inArea = $state(false);
-        
-        if (catchZone) {
-            catchZone.addEventListener('mousemove', (event: MouseEvent) => {
-                if (isPauseGame) return;
-
-                if (Date.now() > cooldownCatching && inArea) {
-                    const mouseX = event.clientX;
-                    const mouseY = event.clientY;
-                    animateCatch(mouseX, mouseY);
-                    
-                    cooldownCatching = Date.now() + randomInterval(10000, 15000);
-                }
-            });
-
-            catchZone.addEventListener('mouseenter', () => {
-                inArea = true;
-            });
-
-            catchZone.addEventListener('mouseleave', () => {
-                inArea = false;
-            });
+        if (element) {
+            const bbox = element.getBoundingClientRect();
+            tongueStart.x = bbox.left + bbox.width / 2 + window.scrollX;
+            tongueStart.y = bbox.top + bbox.height / 2 + window.scrollY;
+            tongueEnd.x = tongueStart.x;
+            tongueEnd.y = tongueStart.y;
         }
+    }
 
+    function handleMouseMove(event: MouseEvent) {
+        if (isPauseGame) return;
+        const dx = event.clientX - eyeCenterX;
+        const dy = event.clientY - eyeCenterY;
+        eyeOffsetX += (Math.max(minX, Math.min(maxX, dx)) - eyeOffsetX) * 0.2;
+        eyeOffsetY += (Math.max(minY, Math.min(maxY, dy)) - eyeOffsetY) * 0.2;
+    }
+    
+    function handleCatchZoneMouseMove(event: MouseEvent) {
+        if (isPauseGame) return;
+        if (Date.now() > cooldownCatching && inArea) {
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+            animateCatch(mouseX, mouseY);
+            cooldownCatching = Date.now() + randomInterval(10000, 15000);
+        }
+    }
 
-        // Eye -----------------------------------------
+    function handleCatchZoneEnter() { inArea = true; }
+    function handleCatchZoneLeave() { inArea = false; }
+
+    onMount(() => {
+        // Fetch data
+        fetch(`${base}/skyColor.json`).then(r => r.json()).then(data => { skyColor = data; });
+        fetch(`${base}/chameleonPalettes.json`).then(r => r.json()).then(data => { chameleonPalettes = data; });
+
+        // Event listeners
+        const eye = document.getElementById('eye-chameleon1');
         if (eye) {
             const rect = eye.getBoundingClientRect();
             eyeCenterX = rect.left + rect.width / 2;
             eyeCenterY = rect.top + rect.height / 2;
         }
-
-        const handleMouseMove = (event: MouseEvent) => {
-            if (isPauseGame) return;
-
-            const dx = event.clientX - eyeCenterX;
-            const dy = event.clientY - eyeCenterY;
-
-            eyeOffsetX += (Math.max(minX, Math.min(maxX, dx)) - eyeOffsetX) * 0.2;
-            eyeOffsetY += (Math.max(minY, Math.min(maxY, dy)) - eyeOffsetY) * 0.2;
-        };
-
-
-        // Fly -----------------------------------------
-        let lastFlyX = 0;
-        function moveFly() {
-            if (!fly || !catchZone) return;
-
-            if (!isPauseGame && (fly || catchZone)) {
-                const zoneRect = catchZone.getBoundingClientRect();
-                const flyWidth = fly.offsetWidth || 50;
-                const flyHeight = fly.offsetHeight || 50;
-    
-                const flyX = zoneRect.left + Math.random() * (zoneRect.width - flyWidth);
-                const flyY = zoneRect.top + Math.random() * (zoneRect.height - flyHeight);
-    
-                if (flyX < lastFlyX) {
-                    fly.style.transform = "scaleX(1)";
-                } else {
-                    fly.style.transform = "scaleX(-1)";
-                }
-                lastFlyX = flyX;
-                
-                console.log(flyX, flyY);
-
-                fly.style.left = `${flyX}px`;
-                fly.style.top = `${flyY}px`;
-            };
-
-            setTimeout(moveFly, Math.random() * 1000);
+        
+        const catchZone = document.getElementById('catchZone');
+        if (catchZone) {
+            catchZone.addEventListener('mousemove', handleCatchZoneMouseMove);
+            catchZone.addEventListener('mouseenter', handleCatchZoneEnter);
+            catchZone.addEventListener('mouseleave', handleCatchZoneLeave);
         }
-
+        
         moveFly();
-
-
-        // Auto attack ---------------------------------
+        updateTongueStart();
         autoChameleonAttack();
-
-        // Event listeners -----------------------------
+        
         window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('resize', updateTongueStart);
+
         return () => {
             window.removeEventListener('resize', updateTongueStart);
+            window.removeEventListener('mousemove', handleMouseMove);
             if (catchZone) {
-                catchZone.removeEventListener('mousemove', () => {});
-                catchZone.removeEventListener('mouseleave', () => {});
+                catchZone.removeEventListener('mousemove', handleCatchZoneMouseMove);
+                catchZone.removeEventListener('mouseenter', handleCatchZoneEnter);
+                catchZone.removeEventListener('mouseleave', handleCatchZoneLeave);
             }
         };
     });
@@ -427,7 +446,7 @@
         height: auto; 
         position: absolute; 
         top: 0; 
-        z-index: 0;
+        z-index: 3;
     }
 
     .button-left {
@@ -459,6 +478,7 @@
         transform: translateY(-50%); 
         width: 60%; 
         height: 35%;
+        z-index: 1;
     }
 
     #chameleonText {
@@ -513,7 +533,7 @@
         position: absolute; 
         height: 50px; 
         width: auto; 
-        z-index: 3;
+        z-index: 2;
     }
 </style>
 
@@ -526,7 +546,7 @@
 
 {#if gameEnd}
     <EndScreen onEnd={endGame}>
-        {playerScore >= 15 ? "Well done, you won!" : "The chameleon won!"}
+        {playerScore >= numberToWin ? "Well done, you won!" : "The chameleon won!"}
     </EndScreen>
 {/if}
 
