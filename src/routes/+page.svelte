@@ -204,4 +204,4 @@
 
 <!-- Other Element -->
 <LoadingScreen showLoading={!allLoaded} />
-<ProgressBar {scrollProgress} />
+<!-- <ProgressBar {scrollProgress} /> -->
