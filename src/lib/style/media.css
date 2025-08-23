@@ -1,0 +1,179 @@
+@media (orientation: portrait) and (max-width: 768px) {
+    #rotate-warning {
+        display: flex !important;
+    }
+}
+
+
+@media (max-width: 1292px) {
+    #ChameleonUpsideDown {
+        transform: rotate(12.36deg) translate(33%, 15%) !important;
+    }
+}
+
+
+@media (max-width: 1184px) {
+    #PositionChameleon {
+        transform: rotate(9deg) translate(36%, -16%) !important;
+    }
+
+    #chameleonText {
+        bottom: 310px !important;
+        margin-right: 20px !important;
+    }
+}
+
+
+@media (max-width: 1024px) {
+    #ChameleonTongue {
+        transform: rotate(12.36deg) translate(-7%, -5%) !important;
+    }
+
+    .screen {
+        font-size: .8em !important;
+    }
+}
+
+
+@media (max-width: 898px) {
+    #ChameleonUpsideDown {
+        transform: rotate(9deg) translate(52%, -5%) !important;
+    }
+}
+
+
+@media (max-width: 842px) {
+    #PositionChameleon {
+        transform: rotate(9deg) translate(40%, -16%) !important;
+    }
+
+    #chameleonText {
+        bottom: 300px !important;
+        margin-right: 5px !important;
+    }
+}
+
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    #IdCard {
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+
+    #IdCardText {
+        width: 100% !important;
+        border-top: solid 2px gray !important;
+        padding-top: 15px !important;
+    }
+
+    #IdCardBarCode {
+        text-align: center !important;
+        width: 100% !important;
+    }
+
+    #PositionChameleon {
+        transform: rotate(9deg) translate(58%, 0%) !important;
+    }
+
+    #chameleonText {
+        bottom: 258px !important;
+        margin-right: 5px !important;
+    }
+
+    #chameleonText::after {
+        right: 30px !important;
+        border-left: 25px solid #00000000 !important;
+        border-right: none !important;
+    }
+}
+
+
+@media (max-width: 710px) {
+    #ChameleonDangerText {
+        flex-direction: column-reverse !important;
+        align-items: center;
+    }
+
+    #UICNLink {
+        position: relative !important;
+    }
+}
+
+
+@media (max-width: 616px) {
+    #ChameleonUpsideDown {
+        display: none !important;
+    }
+
+    #FascinatingCamouflageText {
+        max-width: 100% !important;
+    }
+}
+
+
+@media (max-width: 562px) {
+    .cardSlider {
+        padding-inline: 25px !important;
+    }
+}
+
+
+@media (max-width: 425px) {
+    #PositionChameleon {
+        right: -140px !important;
+    }
+
+    #ChameleonUpsideDown {
+        display: none !important;
+    }
+
+    #ChameleonTongue {
+        transform: rotate(12.36deg) translate(-18%, -10%) !important;
+    }
+
+    #ChameleonDangerText>div {
+        max-width: 100% !important;
+    }
+
+    #graphDanger {
+        width: 250px !important;
+        height: 250px !important;
+    }
+
+    #sliders {
+        height: unset !important;
+    }
+
+    .title {
+        text-shadow: 3px 3px 0px #6f861e !important;
+    }
+
+    .cardSlider {
+        height: unset !important;
+        margin-block: 10px !important;
+    }
+
+    .cardSlider h2 {
+        font-size: 1.5em !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    #ChameleonTongue {
+        display: none !important;
+    }
+
+    #ChameleonTongueText {
+        margin: 85px 0 75px 0 !important;
+    }
+
+    #graphDanger {
+        width: 200px !important;
+        height: 200px !important;
+    }
+}
