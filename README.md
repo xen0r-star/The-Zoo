@@ -20,7 +20,7 @@
 </h3> -->
 
 <div align="center">
-  <a href="https://xen0r-star.github.io/The-Zoo/" target="_blank" rel="noopener noreferrer">
+  <a href="https://xen0r-star.github.io/The-Zoo/">
     <h3>
       👉 Live Demo 👈
     </h3>
