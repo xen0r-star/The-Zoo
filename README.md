@@ -70,7 +70,7 @@
   - [x] Information panel [5/3]
   - [x] Information panel uses $state and $derived
   - [x] Unlock a button after reading all facts
-  - [] Earn mynts
+  - [ ] Earn mynts
 - **Bonus requirements**:
   - [X] Extra hours (8h + 27h = 35h)
   - [X] Use of svelte:head in +layout.svelte
