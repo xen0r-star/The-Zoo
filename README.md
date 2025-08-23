@@ -20,11 +20,11 @@
 </h3> -->
 
 <div align="center">
-  <a href="https://xen0r-star.github.io/The-Zoo/">
-    <h3>
+  <h3>
+    <a href="https://xen0r-star.github.io/The-Zoo/" target="_blank">
       👉 Live Demo 👈
-    </h3>
-  </a>
+    </a>
+  </h3>
 </div>
 
 <!-- TABLE OF CONTENTS -->
