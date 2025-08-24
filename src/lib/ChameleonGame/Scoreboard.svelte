@@ -8,7 +8,7 @@
         position: absolute; 
         top: 0; 
         width: 100%; 
-        z-index: 1; 
+        z-index: 3; 
         padding: 75px 0; 
         color: #1e1e1e; 
         font-size: 1.25em; 
