@@ -16,6 +16,7 @@
 	import Section7 from '$lib/HomePage/Section7.svelte';
 
 
+    // Loading State
     let loaded = $state({        
         chameleonPalettes: false,
         skyColor: false,
@@ -25,54 +26,50 @@
         loaded.chameleonPalettes && loaded.skyColor && loaded.facts
     ) 
 
-    
 
-
+    // Chameleon Color
     type ChameleonColor = "green" | "red" | "purple" | "blue" | "yellow";
     let chameleonPalettes = $state<Partial<Record<ChameleonColor, any>>>({});
     let chameleonColor = $state<ChameleonColor>('green');
-    let chameleonActiveColor = $state({
-        color1: "#6E8823",
-        color2: "#90AD28",
-        color3: "#8EA628",
-        color4: "#E3E63B",
-        color5: "#B8CC2B",
-        color6: "#76821B"
-    });
-
-    $effect(() => {
-        const palette = chameleonPalettes && chameleonPalettes[chameleonColor];
-        if (palette) {
-            chameleonActiveColor = palette;
+    let chameleonActiveColor = $derived(chameleonPalettes && chameleonPalettes[chameleonColor]
+        ? chameleonPalettes[chameleonColor]
+        : {
+            color1: "#6E8823",
+            color2: "#90AD28",
+            color3: "#8EA628",
+            color4: "#E3E63B",
+            color5: "#B8CC2B",
+            color6: "#76821B"
         }
-    });
+    );
     
     
-    const hour = new Date().getHours();
+    // Sky Color
     let skyColor = $state([]);
     $effect(() => {
         if (skyColor.length > 0) {
+            const hour = new Date().getHours();
             document.body.style.setProperty('--sky-tree-fill', skyColor[Math.floor(hour / 2)]);
         }
     });
 
     
-    let facts = $state([
-        {
-            "title": "",
-            "icon": "",
-            "description": "",
-            "chameleonColor": "",
-            "background": ""
-        }
-    ]);
+    // Facts Slider
+    interface Fact {
+        title?: string;
+        icon?: string;
+        description?: string;
+        chameleonColor?: ChameleonColor;
+        background?: string;
+        [key: string]: any;
+    }
+    let facts = $state<Fact[]>([]);
     let currentFacts = $state(0);
-    let totalFacts = $state(0);
     let unlockLevel = $state(0);
 
     $effect(() => {
         if (loaded.facts) {
-            const level = Math.round((currentFacts + 1) / totalFacts * 100);
+            const level = Math.round((currentFacts + 1) / facts.length * 100);
             if (level > unlockLevel) {
                 unlockLevel = level;
             }
@@ -82,12 +79,11 @@
         }
     });
 
-
     function syncChameleonColorIndex() {
         chameleonColor = (facts[currentFacts]?.chameleonColor as ChameleonColor) || 'green';
     }
     function nextSlide() {
-        if (currentFacts < totalFacts - 1) currentFacts += 1;
+        if (currentFacts < facts.length - 1) currentFacts += 1;
         setTimeout(syncChameleonColorIndex, 500);
     }
     function prevSlide() {
@@ -102,6 +98,7 @@
     }
 
 
+    // Easter Egg
     let showHeart = $state(false);
     function love() {
         showHeart = false;
@@ -113,46 +110,35 @@
         }, 10);
     }
 
-    
 
+    // On Mount
     let scrollProgress = $state(0);
-    
     let eyeOffsetX = $state(0);
     let eyeOffsetY = $state(0);
     let eyeCenterX = 0;
     let eyeCenterY = 0;
+    const minX = -3, maxX = 17, minY = -3, maxY = 5;
 
-    const minX = -3;
-    const maxX = 17;
-    const minY = -3;
-    const maxY = 5;
+    function handleMouseMove(event: MouseEvent) {
+        const dx = event.clientX - eyeCenterX;
+        const dy = event.clientY - eyeCenterY;
+        eyeOffsetX += (Math.max(minX, Math.min(maxX, dx)) - eyeOffsetX) * 0.2;
+        eyeOffsetY += (Math.max(minY, Math.min(maxY, dy)) - eyeOffsetY) * 0.2;
+    }
 
-    onMount(function() {
-        // Recover data ---------------------------------------
-        fetch(`${ base }/facts.json`)
-        .then(response => response.json())
-        .then(data => {
-            facts = data;
-            loaded.facts = true;
-            totalFacts = facts.length;
-        });
+    function handleScroll() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        scrollProgress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    }
 
-        fetch(`${ base }/skyColor.json`)
-        .then(response => response.json())
-        .then(data => {
-            skyColor = data;
-            loaded.skyColor = true;
-        });
+    onMount(() => {
+        // Fetch data
+        fetch(`${base}/facts.json`).then(r => r.json()).then(data => { facts = data; loaded.facts = true; });
+        fetch(`${base}/skyColor.json`).then(r => r.json()).then(data => { skyColor = data; loaded.skyColor = true; });
+        fetch(`${base}/chameleonPalettes.json`).then(r => r.json()).then(data => { chameleonPalettes = data; loaded.chameleonPalettes = true; });
 
-        fetch(`${ base }/chameleonPalettes.json`)
-        .then(response => response.json())
-        .then(data => {
-            chameleonPalettes = data;
-            loaded.chameleonPalettes = true;
-        });
-        
-
-        // Eye -----------------------------------------
+        // Eye center
         const eye = document.getElementById('eye-chameleon1');
         if (eye) {
             const rect = eye.getBoundingClientRect();
@@ -160,21 +146,7 @@
             eyeCenterY = rect.top + rect.height / 2;
         }
 
-        const handleMouseMove = (event: MouseEvent) => {
-            const dx = event.clientX - eyeCenterX;
-            const dy = event.clientY - eyeCenterY;
-
-            eyeOffsetX += (Math.max(minX, Math.min(maxX, dx)) - eyeOffsetX) * 0.2;
-            eyeOffsetY += (Math.max(minY, Math.min(maxY, dy)) - eyeOffsetY) * 0.2;
-        };
-
-        function handleScroll() {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            scrollProgress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        }
-
-        // Event listener ------------------------------
+        // Event listeners
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('mousemove', handleMouseMove);
         handleScroll();

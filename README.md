@@ -189,7 +189,7 @@ The design of this project was created in Figma.
 - Chameleon animation: [[xen0r-star]](https://github.com/xen0r-star)
 - UI/UX: [[xen0r-star]](https://github.com/xen0r-star)
 - Project management: [[xen0r-star]](https://github.com/xen0r-star)
-- Motivation and coffee: [[xen0r-star]](https://github.com/xen0r-star)
+- Zoo Banner: [[lynn89-sudo]](https://github.com/lynn89-sudo/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
