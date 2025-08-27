@@ -427,6 +427,13 @@
 </script>
 
 <style>
+    img { /* Disable dragable image */
+        -webkit-user-drag: none; /* Chrome, Safari */
+        -khtml-user-drag: none;  /* Ancien Konqueror */
+        -moz-user-drag: none;    /* Firefox (expérimental) */
+        -o-user-drag: none;      /* Opera */
+    }
+
     .leaf {
         width: 100%; 
         height: auto; 
