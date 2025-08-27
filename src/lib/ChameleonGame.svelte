@@ -16,8 +16,8 @@
 
     const numberToWin = 15;
     const speedFly = 1;
-    const chameleonLuckDay = 3/10;
-    const chameleonLuckNight = 2/10;
+    const chameleonLuckDay = 5/10;
+    const chameleonLuckNight = 3/10;
 
 
     // Phrases Chameleon
